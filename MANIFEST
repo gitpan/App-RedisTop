@@ -11,8 +11,6 @@ lib/App/RedisTop/Component/Save.pm
 lib/App/RedisTop/Perform.pm
 Makefile.PL
 MANIFEST
-MYMETA.json
-MYMETA.yml
 README
 README.md
 t/00.compile.t

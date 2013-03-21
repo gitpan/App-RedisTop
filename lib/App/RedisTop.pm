@@ -1,7 +1,7 @@
 package App::RedisTop;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 1;
 __END__
@@ -16,7 +16,7 @@ Redis resource statistics tool.
 
 =head1 AUTHOR
 
-Tsuyoshi Torii E<lt>toritori0318(at)cpan.orgE<gt>
+Tsuyoshi Torii E<lt>toritsuyo(at)cpan.orgE<gt>
 
 =head1 SEE ALSO
 
