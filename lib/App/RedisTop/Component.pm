@@ -1,7 +1,23 @@
 package App::RedisTop::Component;
 use Term::ANSIColor qw/colored/;
 
-sub new {}
+sub new {
+    my $class = shift;
+
+    my %args = @_;
+    my $self = bless {
+        redis_config => $args{redis_config},
+    }, $class;
+}
+
+sub redis_config {
+    my ($self, $value) = @_;
+    if($value) {
+        $self->{redis_config} = $value;
+    }
+    return $self->{redis_config};
+}
+
 sub stat_values {
     my ($self, $stat, $prev_stat) = @_;
     my @results;
@@ -19,6 +35,14 @@ sub stat_values {
             if ($@) {
                 $value = $stat->{$stat_key};
             }
+        } elsif($row->{denominator_key}) {
+            if($self->redis_config && $self->redis_config->{$row->{denominator_key}}) {
+                $value = sprintf("%.2f", ($stat->{$stat_key} / $self->redis_config->{$row->{denominator_key}}) * 100);
+            } else {
+                $value = "-1";
+            }
+        } elsif($row->{data}) {
+            $value = $row->{data}->();
         } else {
             $value = $stat->{$stat_key};
         }
